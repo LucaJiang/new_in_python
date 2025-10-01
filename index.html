@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Shall We Upgrade? Navigating Python's Rapid Evolution</title>
+
+    <meta name="description" content="A guide to different Python versions and their features">
+    <meta name="author" content="Wenxin Jiang">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h2>Shall We Upgrade?<br/>Navigating Python's Rapid Evolution</h2>
+  <p style="text-align:center;">Wenxin Jiang · PyCon HK</p>
+  <p style="text-align:center;">Oct. 11, 2025</p>
+  <p style="text-align:center;font-size:0.7em">
+  </p>
+  <aside class="notes">
+Good afternoon! I'm sure many of you have noticed that Python 3.14 has officially landed. Let's do a quick pulse
+check—by a show of hands, how many of you have already glanced through the release notes?
+
+Here’s the core idea: Python now follows a predictable annual release cycle, with a major version arriving every
+October—and the latest one is already here. If you take away just one URL from this talk, let it be the official Python
+versions page. That page is your go-to compass for understanding what's new, what's improved, and what's being phased
+out.
+
+My goal today is simple: I want to get you excited about staying up to date with each release—and maybe even inspire you
+to try new features early.
+To make that happen, we’ll walk through some of the most impactful changes introduced between Python 3.10 and 3.14.
+Along the way, you’ll get a feel for how the release notes are structured year after year—and how the core development
+team, alongside a dedicated community of contributors, continuously refines Python: smoothing out rough edges, boosting
+performance, and making it more enjoyable to use in real-world projects.
+  </aside>
+</section>
+
+<section>
+  <h3>Release Rhythm · Where We Are</h3>
+  <img src="img/status_python_version.png" alt="Python Release Cycle" style="width:90%;box-shadow:0 0 8px rgb(255, 255, 255);border-radius:8px;">
+  <p style="font-size:0.6em;margin-top:0.6em">
+    Source: <a href="https://devguide.python.org/versions/" target="_blank">Status of Python versions:<br>devguide.python.org/versions/</a>
+  </p>
+  <aside class="notes">
+Let's take a moment to focus on the timeline. Since Python 3.9, the project has settled into a predictable yearly
+release cadence, with a new major version arriving every October.
+
+Each version goes through a clear lifecycle, and you can track these phases on the official Python versions page—this
+chart is a direct snapshot of that page. Each row represents a release branch, and the blue line marks where we are
+today, with 3.14 freshly released.
+
+New features are introduced during the feature phase. Then comes pre-release, when the feature set is locked but the team
+still accepts bug fixes. After that, the bug fix phase begins, delivering regular maintenance updates. Later, the branch
+moves into security-only mode, accepting only critical security patches. Finally, the version reaches end-of-life and is
+officially frozen.
+
+If you ever need to check the status of any Python version, this single URL tells you exactly where each release stands.
+  </aside>
+</section>
+
+<section>
+  <h3>What’s New Series · How to Follow</h3>
+  <ul>
+    <li>Official doc: <a href="https://docs.python.org/3/whatsnew/index.html" target="_blank">docs.python.org/3/whatsnew</a></li>
+    <li>
+      Each feature is specified in the
+      <a href="https://peps.python.org/" target="_blank" rel="noreferrer">PEP</a> (Python Enhancement Proposal)
+    </li>
+  </ul>
+  <img src="img/whats_new_python.png" alt="Screenshot of the 'What's New in Python' hub showing sections like Release Highlights, New Features, Optimizations" style="width:70%;box-shadow:0 0 8px rgb(255, 255, 255);border-radius:8px;">
+  <p style="font-size:0.6em;margin-top:-0.5em;">
+    Docs hub: <a href="https://docs.python.org/3.13/whatsnew/index.html" target="_blank">What's New in Python</a> ·
+    <a href="https://peps.python.org/" target="_blank">PEP index</a>.
+  </p>
+  <aside class="notes">
+To keep up with Python's rapid evolution, you need to know about two key resources: the "What's New" pages
+and PEPs. The "What's New" documentation is your essential guide for each release—it summarizes all the important changes in an
+accessible way. And when you want to understand the deep technical details or design philosophy behind any feature,
+that's when you turn to its PEP—the Python Enhancement Proposal.
+
+Here's how an idea becomes a Python feature: It usually starts with discussion on public forums. If there's enough
+community interest, someone will draft a PEP—a comprehensive design document. They find a core developer to sponsor it,
+then submit it as a pull request to the PEPs repository. A PEP editor assigns it a number and checks the formatting.
+Then the real work begins: open discussion, iteration, and refinement. For standards-track changes, the proposal
+eventually goes to the Steering Council for a final decision. This open process is a core strength of the Python ecosystem.
+  </aside>
+</section>
+
+<section>
+  <h3>Structure of "What's New" Pages</h3>
+  <div style="display:flex;gap:2rem;align-items:flex-start;">
+    <div style="flex:1;">
+      <p>Core Features</p>
+      <ul style="font-size:0.8em;">
+        <li><strong>Release Highlights</strong></li>
+        <li><strong>New Features</strong></li>
+        <li><strong>Type Hints</strong></li>
+        <li><strong>Other Language Changes</strong></li>
+      </ul>
+    </div>
+    <div style="flex:1;">
+      <p>Technical Details</p>
+      <ul style="font-size:0.8em;">
+        <li><strong>Interpreter / Security / C API</strong></li>
+        <li><strong>Optimizations</strong></li>
+        <li><strong>New &amp; Improved Modules</strong></li>
+        <li><strong>Deprecated &amp; Removed Modules</strong></li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:0.7em;margin-top:1em;">
+    <strong>Tip:</strong> Start with highlights → New Features → [your interests].
+  </p>
+  <aside class="notes">
+To navigate any Python release, you only need two resources: the 'What's New' docs and PEPs.
+Think of the 'What's New' page as your roadmap. ​​Start with the 'Highlights'​​ for a quick overview. ​​Then dive into
+'New Features'​​ for the deep dive on what matters to you—like new syntax, optimizations, or typing improvements.
+Everything else, from deprecated modules to C API changes, is neatly organized if you need it.
+For the full story behind any feature, that's where ​​PEPs​​ come in. They're the formal
+design documents that explain the 'why' and the 'how'.
+So remember: Highlights → New Features → your interests. That's all you need to stay up to date.
+  </aside>
+</section>
+
+<section>
+  <h3>3.10 · New syntax feature:<br>  Structural Pattern Matching</h3>
+  Declarative <em>match/case</em> replaces nested if/elif
+  <pre><code class="hljs python">def http_error(status):
+    match status:
+        case 400:
+          return "Bad request"
+        case 401 | 403 | 404:
+          return "Not allowed"
+        case _: # wildcard
+          return "Something's wrong"</code></pre>
+  <p style="font-size:0.6em">
+    Docs: <a href="https://docs.python.org/3.10/whatsnew/3.10.html" target="_blank">What’s New in 3.10</a> ·
+    PEPs: <a href="https://peps.python.org/pep-0634/" target="_blank">PEP 634</a>, <a href="https://peps.python.org/pep-0635/" target="_blank">635</a>, <a href="https://peps.python.org/pep-0636/" target="_blank">636</a>.
+  </p>
+  <aside class="notes">
+Now, as we continue down the ​​What's New in Python 3.10​​ page, we get to one of the headline features: ​​Structural
+Pattern Matching​​.
+Basically, it's a much cleaner way to handle complex conditional logic—you know, those long if/elif/else chains we've
+all written. Instead of writing a bunch of instructions, you just declare the patterns you want to match against your
+data.
+Look at this example: you can match a single value, like 400, or combine several with a bar, and that underscore
+_ acts as a catch-all wildcard. It makes the code so much more readable.
+For all the details on how it works, the specification, and the tutorial, you can find the links to PEPs 634, 635, and
+636 right here.
+  </aside>
+</section>
+
+<section>
+  <h3>3.10 · New typing feature:<br>Union Types</h3>
+  <pre><code class="hljs python"># before
+from typing import Union
+def fun(x: Union[str, bytes]):
+# after
+def f(x: str | bytes):
+  </code></pre>
+  <p style="font-size:0.6em">
+    Docs: <a href="https://docs.python.org/3.10/whatsnew/3.10.html" target="_blank">What's New in 3.10</a> ·
+    PEP: <a href="https://peps.python.org/pep-0604/" target="_blank">PEP 604</a>, <a href="https://peps.python.org/pep-0613/" target="_blank">PEP 613</a>, <a href="https://peps.python.org/pep-0647/" target="_blank">PEP 647</a>.
+  </p>
+  <aside class="notes">
+Alright, moving on to another great quality-of-life improvement in the typing system: the new ​​Union Types​​ syntax.
+You know how we used to have to import Union and write things like Union[str, bytes]? It worked, but it was a bit
+verbose.
+Now, you can just use a clean vertical bar | like you see here. So str | bytes does the exact same thing. It's much more
+concise and honestly, it just reads more naturally.
+And the best part is, this new syntax isn't just for type hints. You can also use it directly in isinstance() checks,
+making it really versatile.
+For all the details on this change and other typing updates, the links to PEP 604 and the others are right here.
+  </aside>
+</section>
+
+<section>
+  <h3>3.11 · Highlights: A Free Speed Boost</h3>
+  <!-- https://docs.python.org/3.13/whatsnew/3.11.html#faster-cpython -->
+CPython 3.11 is an average of <strong>25%</strong> faster than 3.10, with <strong>10–60%</strong> overall speed improvements.</li>
+  <ul style="font-size:0.8em">
+    <li>Faster Startup: Interpreter startup is now <strong>10-15%</strong> faster.</li>
+    <li>Faster Runtime: Cheaper, lazy Python frames</li>
+  </ul>
+  <img src="img/pyperformance.svgz" alt="Bar chart showing speed improvements of Python 3.11 over 3.10 across various benchmarks" style="width:70%;box-shadow:0 0 8px rgb(255, 255, 255);border-radius:8px;">
+  <p style="font-size:0.8em">
+    Docs: <a href="https://docs.python.org/3/whatsnew/3.11.html" target="_blank">What’s New in 3.11 (Release highlights)</a> · <a href="https://openbenchmarking.org/result/2205310-PTS-PYTHON3127#results" target="_blank">Benchmark</a>
+  </p>
+  <aside class="notes">
+Alright, moving on to Python 3.11, which delivered a fantastic free speed boost—no code changes required! It's like
+finding a coupon under your keyboard; you just get faster performance for free.
+On average, CPython 3.11 is about 25% faster than 3.10, with some workloads seeing improvements of 10% to 60%. This
+includes faster startup times, which is a big win for short-running scripts, and runtime optimizations like cheaper
+frame handling.
+For all the exciting details, you can check out the 'What's New in 3.11' page linked here.
+  </aside>
+</section>
+
+<section>
+  <h3>3.13 · Highlights: Free‑Threaded</h3>
+  <p>Global Interpreter Lock ensures only one Python thread executes at a time</p>
+  <div style="display:flex;gap:1rem;margin-top:0.1em;">
+    <div style="flex:1;">
+      <h4 style="color:#90EE90;">✓ Benefits</h4>
+      <ul style="font-size:0.8em;">
+        <li>True parallel execution for CPU-bound tasks</li>
+        <li>Better multi-core utilization</li>
+        <li>No need for multiprocessing overhead</li>
+      </ul>
+    </div>
+    <div style="flex:1;">
+      <h4 style="color:#FFA07A;">⚠ Trade-offs</h4>
+      <ul style="font-size:0.8em;">
+        <li>Single-threaded code may be slower</li>
+        <li>C extensions need compatibility updates</li>
+        <li>Memory usage increases</li>
+      </ul>
+    </div>
+  </div>
+  
+  <p style="font-size:0.8em">
+    Docs: <a href="https://docs.python.org/3/whatsnew/3.13.html" target="_blank">What's New in 3.13</a> ·
+    PEP 703: <a href="https://peps.python.org/pep-0703/" target="_blank">Making the GIL Optional</a>
+  </p>
+  <aside class="notes">
+Now we come to what's probably the most anticipated change in Python 3.13: the ​​free-threaded interpreter​​, which
+makes the Global Interpreter Lock optional.
+For decades, the GIL has been Python's famous limitation—it ensures only one thread can execute Python code at a time,
+which limited true parallelism.
+With this new free-threaded mode, CPU-bound threads can finally run in parallel across multiple cores. This means
+better utilization of modern hardware without the overhead of multiprocessing.
+But this power comes with trade-offs. Single-threaded performance might see a slight dip due to added synchronization,
+and existing C extensions will need updates to work safely. Memory usage also increases slightly.
+So it's a game-changer for specific workloads, particularly CPU-intensive parallel tasks, while I/O bound applications
+may not see as much benefit. It's an exciting step forward that opens up new possibilities for Python performance."
+  </aside>
+</section>
+
+<section>
+  <h3>3.14 · Official Free‑Threaded &amp; Multiple interpreters</h3>
+  <ul>
+    <li><strong>PEP 779</strong>: Free‑threaded Python is <em>officially supported</em> (still optional).</li>
+    <li><strong>PEP 734</strong>: Multiple interpreters in the stdlib for multi‑core parallelism with isolation.</li>
+  </ul>
+  <p style="font-size:0.8em">
+    Docs: <a href="https://docs.python.org/3.14/whatsnew/3.14.html" target="_blank">What’s New in 3.14</a> ·
+    <a href="https://peps.python.org/pep-0779/" target="_blank">PEP 779</a> ·
+     <a href="https://peps.python.org/pep-0734/" target="_blank">PEP 734</a> ·
+  </p>
+  <aside class="notes">
+Alright, moving on to Python 3.14, which solidifies two major advancements for parallelism. First, PEP 779 makes
+free-threaded Python officially supported—it's no longer experimental, though still optional. This gives you the
+confidence to pilot it in CPU-bound scenarios without worrying about it being deprecated.
+Second, PEP 734 introduces multiple interpreters in the standard library, allowing you to run isolated Python
+environments within the same process. This enables true multi-core parallelism with minimal overhead, perfect for
+scaling out workloads.
+For all the details on these game-changing features, check out the 'What's New in 3.14' page and the linked PEPs.
+  </aside>
+</section>
+
+<section>
+  <h3>Package Migration · uv</h3>
+  <ul>
+    <li>🚀 Replace pip with similar interface</li>
+    <li>⚡️ 10-100x <strong>faster</strong> than pip</li>
+    <li>🗂️ Provides <strong>comprehensive project management</strong></li>
+    <!-- <li>🔒 Unified, cross-platform dependency locking</li> -->
+  </ul>
+<pre><code class="hljs bash">uv init # create project
+# install and pin specific Python version
+uv python install 3.13
+uv python pin 3.13
+# install packages
+uv add package-name
+uv add -r requirements.txt 
+</code></pre>
+  <p style="font-size:0.8em">
+    Docs: <a href="https://docs.astral.sh/uv/guides/install-python/" target="_blank">uv: install Python</a> 
+    · Migration guide: <a href="https://docs.astral.sh/uv/guides/migration/pip-to-project/" target="_blank">pip to uv</a>.
+  </p>
+  <aside class="notes">
+As we explore these new Python features, you'll want modern tools to manage your environments. Tools like uv make it
+effortless to install and manage specific Python versions with incredible speed. This is especially useful when
+experimenting with different Python releases or testing new features in isolated environments.
+  </aside>
+</section>
+
+<section>
+  <h3>Takeaways</h3>
+  <ul>
+    <li>Annual release: 3.11 (2022), 3.12 (2023), 3.13 (2024), 3.14 (2025)...</li>
+    <li>"What’s New" pages for each version summarize key changes.</li>
+    <li>PEPs provide detailed design docs for new features.</li>
+    <li>Stay curious and keep exploring each release!</li>
+  </ul>
+  <p style="font-size:0.8em">
+  </p>
+  <aside class="notes">
+So, to sum up: Python's annual release cycle means a new version every October, each packed with improvements.
+Bookmark the "What's New" pages—they're your best friend for quick overviews.
+When you want the full story, dive into the PEPs for the deep technical details.
+But most importantly, stay curious! Make a habit of exploring each release—you'll be amazed at how Python keeps
+evolving.
+Happy coding, and enjoy the journey!
+  </aside>
+</section>
+
+    </div>
+  </div>
+<script src="dist/reveal.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <link rel="stylesheet" href="plugin/highlight/github-dark.css" id="highlight-theme" />
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            // disableLayout: true,
+            transition: 'none',
+            slideNumber: true,
+            showSlideNumber: 'all',
+            help: true,
+            menu: {
+                titleSelector: 'h1, h2, h3',
+                hideMissingTitles: true,
+            },
+            plugins: [RevealHighlight, RevealNotes, RevealMenu],
+        });
+    </script>
+</body>
+
+</html>
